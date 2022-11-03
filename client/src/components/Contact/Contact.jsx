@@ -23,8 +23,6 @@ export const Contact = ({ courses }) => {
    const handleRegister = async (e) => {
       e.preventDefault();
 
-      console.log("Ishladim");
-
       const check = {
          fullName: fullName.trim().length === 0,
          phoneNumber: phoneNumber.trim().length === 0,

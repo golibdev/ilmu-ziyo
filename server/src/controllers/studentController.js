@@ -33,6 +33,22 @@ exports.getAll = async (req, res) => {
    }
 }
 
+exports.getAllNoPage = async (req, res) => {
+   try {
+      const students = await Student.find({})
+         .populate('courseId')
+         .sort({ createdAt: -1 })
+      
+      if(!students) {
+         return res.status(404).json({ message: "O'quvchilar mavjud emas" })
+      }
+
+      res.status(200).json({ students })
+   } catch (err) {
+      res.status(501).json({ message: err.message })
+   }
+}
+
 exports.getOne = async (req, res) => {
    try {
       const id = req.params.id

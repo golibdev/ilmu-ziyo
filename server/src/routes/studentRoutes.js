@@ -4,6 +4,7 @@ const { studentController } = require('../controllers');
 const { verifyAdminToken } = require('../middleware/adminTokenHandler')
 
 router.get('/', verifyAdminToken, studentController.getAll)
+router.get('/get-all', verifyAdminToken, studentController.getAllNoPage)
 router.get('/:id', verifyAdminToken, studentController.getOne)
 router.post('/register', studentController.register)
 router.put('/update-status/:id', verifyAdminToken, studentController.updateStatus);

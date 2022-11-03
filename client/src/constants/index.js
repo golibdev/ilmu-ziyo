@@ -1,3 +1,3 @@
-export const baseUrl = "http://localhost:4000/api/v1/"
+export const baseUrl = "https://api.perfectbuxgalter.uz/api/v1/"
 export const token = localStorage.getItem('token');
 export const headers = { headers: { Authorization: `Bearer ${token}` } }

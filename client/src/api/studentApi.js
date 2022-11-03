@@ -10,6 +10,10 @@ export const studentApi = {
       `${baseUrl}student`,
       headers
    ),
+   getAllNoPage: () => axios.get(
+      `${baseUrl}student/get-all`,
+      headers
+   ),
    getPaging: (params) => axios.get(
       `${baseUrl}student?page=${params}`,
       headers

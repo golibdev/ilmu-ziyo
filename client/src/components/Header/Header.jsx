@@ -26,7 +26,13 @@ export const Header = ({clickToggle}) => {
                   </a>
 
                   <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                     <li>
+                     <li style={{ cursor: 'pointer' }}>
+                        <Link className="dropdown-item d-flex align-items-center" to={'/admin/profile'}>
+                           <i className="fas fa-cog"></i>
+                           <span>Sozlamalar</span>
+                        </Link>
+                     </li>
+                     <li style={{ cursor: 'pointer' }}>
                         <a className="dropdown-item d-flex align-items-center" onClick={() => {
                            logout(navigate)
                         }}>

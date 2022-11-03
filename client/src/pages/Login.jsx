@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authApi } from '../api/authApi'
 import { isAuthenticated } from '../handlers/auth'
@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 
 export const Login = () => {
    const navigate = useNavigate()
+   const passwordRef = useRef(null)
    const [username, setUsername] = useState('')
    const [password, setPassword] = useState('')
    useEffect(() => {
@@ -53,6 +54,14 @@ export const Login = () => {
          }
       }
    }
+
+   const viewPass = (e) => {
+      if(e.target.checked) {
+         passwordRef.current.setAttribute('type', 'text')
+      } else {
+         passwordRef.current.setAttribute('type', 'password')
+      }
+   }
    return (
       <div className='d-flex align-items-center justify-content-center' id='login-container'>
          <div className="container">
@@ -82,10 +91,20 @@ export const Login = () => {
                               className='form-control' 
                               id='password' 
                               placeholder='Parol...' 
-                              autoComplete='off' 
+                              autoComplete='off'
+                              ref={passwordRef} 
                               value={password} 
                               onChange={e => setPassword(e.target.value)}
                            />
+                        </div>
+                        <div className="mb-3 form-check">
+                           <input
+                              onClick={viewPass} 
+                              type="checkbox" 
+                              className="form-check-input" 
+                              id="viewPass"
+                           />
+                           <label className="form-check-label" htmlFor="viewPass">Parolni ko'rish</label>
                         </div>
                      </div>
                      <div className="card-footer">

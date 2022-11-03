@@ -5,6 +5,7 @@ import { Loader } from '../components/Loader/Loader'
 import moment from 'moment'
 import { toast } from 'react-toastify'
 import { StudentPagination } from '../components/Pagination/StudentPagination'
+import { downloadExcel } from "react-export-table-to-excel";
 
 export const Student = () => {
    const [students, setStudents] = useState([])
@@ -66,18 +67,57 @@ export const Student = () => {
 
 const StudentList = ({ students }) => {
    const [selected, setSelected] = useState({});
-   const [checked, setChecked] = useState(false);
 
    const getStudent = async (id) => {
       try {
          const res = await studentApi.getOne(id);
          setSelected(res.data.student);
-         setChecked(true)
+      } catch (err) {}
+   }
+
+
+   const exportToExcelHandler = async (e) => {
+      e.preventDefault()
+      const header = ["F.I.SH", "Telefon raqam", "Kurs", "Holati", "Ro'yxatdan o'tgan vaqti"];
+
+      const data = await getAllStudents()
+
+      const body = data.map(item => ({
+         fullName: item.fullName,
+         phoneNumber: `"${item.phoneNumber.toString()}"`,
+         course: item.courseId.title,
+         status: item.status == 1 ? 'Yangi' : item.status == 2 ? "O'qiydi" : "O'qimaydi",
+         registeredAt: moment(item.createdAt).format('DD.MM.YYYY HH:mm')
+      }))
+
+      let date = new Date()
+      let day = date.getDay()
+      let month = date.getMonth()
+      let year = date.getFullYear()
+
+      downloadExcel({
+         fileName: `Students_${day}_${month+1}_${year}`,
+         sheet: "Students",
+         tablePayload: {
+            header,
+            body
+         }
+      })
+   } 
+
+   const getAllStudents = async () => {
+      try {
+         const res = await studentApi.getAllNoPage()
+         return res.data?.students
       } catch (err) {}
    }
    
    return (
       <div className='table-responsive'>
+         <button className='btn btn-primary mb-3' onClick={exportToExcelHandler}>
+            <span className='me-2'>Export to Excel</span>
+            <i className='fas fa-file-excel'></i>
+         </button>
          <table className='table table-striped table-hover table-bordered'>
             <tbody>
                <tr className='text-center'>

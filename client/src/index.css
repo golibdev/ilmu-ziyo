@@ -1,0 +1,93 @@
+#login-container {
+  height: 100vh !important;
+}
+
+#loader-container {
+  height: 70vh !important;
+}
+
+#v-100 {
+  height: 100vh !important;
+}
+
+.spinner-border {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.logo {
+  width: 100px !important;
+}
+
+.card-icon {
+  font-size: 32px;
+  line-height: 0;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  color: #4154f1;
+  background: #f6f6fe;
+}
+
+.title {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.react-tel-input .form-control {
+  width: 100% !important;
+}
+
+.carousel-item  {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/image/3.jpg') !important;
+  height: 675px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-title {
+  width: 100%;
+  font-size: 60px;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.footer-title::after {
+  content: '';
+  display: block;
+  width: 40%;
+  margin-top: 3px;
+  height: 3px;
+  background-color: #4154f1;
+}
+
+@media print {
+  @page {
+    size: A6 !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .toggle-sidebar-btn {
+    display: block !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .carousel-title {
+    top: 40%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .carousel-title {
+    font-size: 35px;
+    top: 40%;
+  }
+}

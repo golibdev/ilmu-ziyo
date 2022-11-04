@@ -45,10 +45,11 @@ export const Login = () => {
             window.location.reload()
          }
       } catch (err) {
+         console.log(err);
          if(err.response === undefined) {
             toast.error('Internetga ulanmagan')
             return
-         } else if(err.response.status === 401) {
+         } else if(err.response.status === 400) {
             toast.error(err.response.data.message)
             return
          }

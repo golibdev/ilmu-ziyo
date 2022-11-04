@@ -117,10 +117,6 @@ exports.updateStatus = async (req, res) => {
          return statusArr.some(item => item === status)
       }
 
-      console.log(status);
-
-      console.log(isValidStatus(status));
-
       if(!isValidStatus(status)) {
          return res.status(404).json({ message: 'Bunday status mavjud emas' })
       }

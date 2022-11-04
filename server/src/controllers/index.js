@@ -1,5 +1,6 @@
 module.exports = {
    adminController: require('./adminController'),
    courseController: require('./courseController'),
-   studentController: require('./studentController')
+   studentController: require('./studentController'),
+   summaryController: require('./summaryController')
 }

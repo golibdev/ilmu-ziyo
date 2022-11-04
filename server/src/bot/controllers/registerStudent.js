@@ -55,7 +55,7 @@ exports.register = async (router, ctx, id) => {
 
             ctxx.session.phone = phone;
             
-            const api = 'http://localhost:4000/api/v1/student/register'
+            const api = 'https://api.perfectbuxgalter.uz/api/v1/student/register'
 
             const users = {
                phoneNumber: ctxx.session.phone,

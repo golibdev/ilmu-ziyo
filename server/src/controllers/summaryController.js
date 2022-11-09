@@ -1,17 +1,32 @@
-const { Student } = require('../models');
+const { Student, User, Service, Course } = require('../models');
 
 exports.summary = async (req, res) => {
    try {
-      const total = await Student.countDocuments();
+      const totalStudents = await Student.countDocuments();
+      const totalUsers = await User.countDocuments();
+      const totalCourses = await Course.countDocuments();
+      const totalServices = await Service.countDocuments();
 
       const newStudent = await Student.find({ status: 1 });
       const resolve = await Student.find({ status: 2 });
       const reject = await Student.find({ status: 3 });
 
       const summary = {
-         newStudent,
-         resolve: resolve.length,
-         reject: reject.length
+         course: {
+            total: totalCourses
+         },
+         service: {
+            total: totalServices
+         },
+         student: {
+            total: totalStudents,
+            new: newStudent.length,
+            resolve: resolve.length,
+            reject: reject.length
+         },
+         user: {
+            total: totalUsers
+         }
       }
 
       res.status(200).json({ summary })

@@ -44,7 +44,6 @@ export const Student = () => {
                      <>
                         <StudentList students={students} />
                         <StudentPagination
-                           data={students}
                            currentPage={currentPage}
                            pageCount={pageCount}
                            setCurrentPage={setCurrentPage}

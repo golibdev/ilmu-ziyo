@@ -1,54 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
-import { toast, ToastContainer } from 'react-toastify'
-import { studentApi } from '../../api/studentApi'
+import { ToastContainer } from 'react-toastify'
+import { CoursesTab } from './CoursesTab'
+import { ServiceTab } from './ServiceTab'
 
-export const Contact = ({ courses }) => {
-   const [fullName, setFullName] = useState('')
-   const [phone, setPhone] = useState('')
-   const [phoneNumber, setPhoneNumber] = useState('')
-   const [courseId, setCourseId] = useState('')
-
-   const options = courses.map(item => ({
-      value: item._id,
-      label: item.title
-   }))
-
-   const handleChange = (e) => {
-      var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})(\d{0,2})/); 
-      setPhone(!x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '') + (x[4] ? '-' + x[4] : ''))
-      setPhoneNumber(x.input);
-   }
-
-   const handleRegister = async (e) => {
-      e.preventDefault();
-
-      const check = {
-         fullName: fullName.trim().length === 0,
-         phoneNumber: phoneNumber.trim().length === 0,
-         courseId: courseId.trim().length === 0
-      }
-
-      if(check.fullName || check.courseId || check.phoneNumber) {
-         return toast.warn("Barcha maydonlarni to'ldiring!")
-      }
-
-      const params = {
-         fullName,
-         phoneNumber,
-         courseId
-      }
-      try {
-         const res = await studentApi.register(params)
-         toast.success(res.data.message)
-         setPhone('')
-         setPhoneNumber('')
-         setFullName('')
-         setCourseId('')
-      } catch (err) {
-         toast.error(err.response.data.message)
-      }
-   }
+export const Contact = ({ courses, services }) => {
 
    return (
       <div className='container mt-5 mb-5' id='contact'>
@@ -56,46 +12,22 @@ export const Contact = ({ courses }) => {
             Ariza qoldirish
          </h1>
          <hr />
-         <form className='row' onSubmit={handleRegister}>
+         <form className='row'>
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                <div className="card shadow mt-3">
-                  <div className="card-body pt-5">
-                     <div className="mb-3">
-                        <label htmlFor="fullName" className='mb-3 card-title p-0'>Ism familiya sharifingiz</label>
-                        <input 
-                           type="text" 
-                           className="form-control" 
-                           id="fullName"
-                           placeholder='F.I.SH'
-                           value={fullName}
-                           onChange={e => setFullName(e.target.value)}
-                        />
-                     </div>
-                     <div className="mb-3">
-                        <label htmlFor="fullName" className='mb-3 card-title p-0'>Telefon raqamingiz</label>
-                        <input 
-                           type="text" 
-                           className="form-control" 
-                           id="fullName"
-                           placeholder='901234567'
-                           value={phone}
-                           onChange={handleChange}
-                        />
-                     </div>
-                     <div className='mb-3'>
-                        <label htmlFor='category' className='mb-3 card-title p-0'>Kursni tanlang</label>
-                        <Select
-                           options={options}
-                           isOptionSelected
-                           className='card-title pt-0 pb-0'
-                           onChange={e => setCourseId(e.value)}
-                        />
-                     </div>
+                  <div className="card-header">
+                     <ul className="nav nav-pills" id="pills-tab" role="tablist">
+                        <li className="nav-item" role="presentation">
+                           <button className="nav-link card-title active px-3 py-2" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Kurslar</button>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                           <button className="nav-link card-title px-3 py-2" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Xizmatlar</button>
+                        </li>
+                     </ul>
                   </div>
-                  <div className="card-footer">
-                     <button className='btn btn-primary'>
-                        Jo'natish
-                     </button>
+                  <div className="card-body pt-3 tab-content" id="pills-tabContent">
+                     <CoursesTab courses={courses}/>
+                     <ServiceTab services={services}/>
                   </div>
                </div>
             </div>

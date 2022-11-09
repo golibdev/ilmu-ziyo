@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import ReactPaginate from 'react-paginate'
-import { studentApi } from '../../api/studentApi'
+import { userApi } from '../../api/userApi'
 
-export const StudentPagination = ({setData, pageCount, setCurrentPage, currentPage }) => {
+export const UserPagination = ({ setData, pageCount, setCurrentPage, currentPage }) => {
 
    const handlePageClick = (event) => {
       setCurrentPage(event.selected + 1)
@@ -11,8 +11,8 @@ export const StudentPagination = ({setData, pageCount, setCurrentPage, currentPa
    useEffect(() => { 
       const getUsers = async (currentPage) => {
          try {
-            const res = await studentApi.getPaging(currentPage)
-            setData(res.data.students)
+            const res = await userApi.getPaging(currentPage)
+            setData(res.data.users)
          } catch (err) {}
       }
       getUsers(currentPage)

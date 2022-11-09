@@ -10,7 +10,7 @@ export const Footer = () => {
                   <ul className='p-0 text-white' style={{ listStyle: 'none' }}>
                      <li><b>Telefon</b>: +998 99 669 00 90</li>
                      <li><b>Faks</b>: +998 99 669 00 90</li>
-                     <li><b>Email</b>: </li>
+                     <li><b>Email</b>: perfectbuxgalter@perfectbuxgalter.uz</li>
                   </ul>
                </div>
                <div className="col-lg-4 col-md-6 col-12">

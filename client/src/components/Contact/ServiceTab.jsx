@@ -74,7 +74,7 @@ export const ServiceTab = ({ services }) => {
             />
          </div>
          <div className='mb-3'>
-            <label htmlFor='category' className='mb-3 card-title p-0'>Kursni tanlang</label>
+            <label htmlFor='category' className='mb-3 card-title p-0'>Xizmatni tanlang</label>
             <Select
                options={options}
                isOptionSelected

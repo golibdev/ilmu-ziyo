@@ -5,12 +5,12 @@ const { API } = require('../config/config');
 
 exports.getAll = async (bot, chatId, messageId) => {
    try {
-      const api = `${API}course`
+      const api = `${API}service`
       const res = await axios.get(api);
 
-      const courses = res.data.courses;
+      const services = res.data.services;
 
-      if(courses.length === 0) {
+      if(services.length === 0) {
          await bot.api.deleteMessage(chatId, messageId)
 
          await bot.api.sendPhoto(chatId, "https://t.me/youngproger/318", {
@@ -23,11 +23,11 @@ exports.getAll = async (bot, chatId, messageId) => {
 
       const keyboard = new InlineKeyboard();
 
-      courses.forEach((course, index) => {
+      services.forEach((service, index) => {
          if(index % 1 === 0) {
             keyboard.row();
          }
-         keyboard.text(`📚 ${course.title}`, `course_${course.id}`);
+         keyboard.text(`📚 ${service.title}`, `service_${service.id}`);
       })
 
       keyboard.row();
@@ -35,7 +35,7 @@ exports.getAll = async (bot, chatId, messageId) => {
 
       await bot.api.deleteMessage(chatId, messageId);
 
-      const message = `<b>Perfect Buxgalter Group</b> o'quv markazidagi mavjud o'quv kurslar. O'quv kursiga ariza qoldirish uchun kursni tanlab, kursga yozilish tugmasiga bosing!
+      const message = `<b>Perfect Buxgalter Group</b>dagi mavjud xizmatlar. Xizmatlarga ariza qoldirish uchun xizmatni tanlab, xizmatga yozilish tugmasiga bosing!
       `
 
       await bot.api.sendPhoto(chatId, "https://t.me/youngproger/318", {
@@ -50,21 +50,21 @@ exports.getAll = async (bot, chatId, messageId) => {
 
 exports.getOne = async (bot, id, chatId, messageId) => {
    try {
-      const api = `${API}course/${id}`
+      const api = `${API}service/${id}`
       const res = await axios.get(api)
-      const course = res.data.course;
+      const service = res.data.service;
 
-      const image = course.image.split('http://localhost:5000')[1]
+      const image = service.image
 
       const path = new InputFile(`public${image}`)
       const keyboard = new InlineKeyboard()
-         .text('✍️ Kursga yozilish', `enrollCourse_${id}`).row()
+         .text('✍️ Xizmatga yozilish', `enrollService_${id}`).row()
          .text('🔝 Bosh menyu', 'start')
 
       await bot.api.deleteMessage(chatId, messageId);
 
       await bot.api.sendPhoto(chatId, path, {
-         caption: course.description,
+         caption: service.description,
          reply_markup: keyboard
       })
    } catch (err) {

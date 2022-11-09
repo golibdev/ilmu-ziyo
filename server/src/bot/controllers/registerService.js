@@ -41,9 +41,17 @@ exports.register = async (router, ctx, id) => {
                return
             }
 
-            const phone = ctxx.message?.contact?.phone_number
+            let phone = ctxx.message?.contact?.phone_number
                ? ctxx.message.contact.phone_number
                : ctxx.msg.text
+
+            const phoneArr = phone.split('');
+
+            const plusIndex = phoneArr.findIndex(item => item == '+');
+
+            if(plusIndex != -1) {
+               phone = +phoneArr.slice(1, phoneArr.length).join('');
+            }
 
             const pattern = /^998(9[012345789]|6[125679]|7[01234569])[0-9]{7}$/
 
@@ -59,10 +67,10 @@ exports.register = async (router, ctx, id) => {
             const users = {
                phoneNumber: ctxx.session.phone,
                fullName: ctxx.session.fullName,
-               courseId: id
+               serviceId: id
             }
 
-            const api = `${API}student/register`;
+            const api = `${API}user/register`;
 
             await axios.post(api, users)
 

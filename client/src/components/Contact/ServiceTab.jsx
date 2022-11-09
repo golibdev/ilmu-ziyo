@@ -50,8 +50,8 @@ export const ServiceTab = ({ services }) => {
       }
    }
    return (
-      <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex="0">
-         <div className="mb-3">
+      <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0">
+      <div className="mb-3">
             <label htmlFor="fullName" className='mb-3 card-title p-0'>Ism familiya sharifingiz</label>
             <input 
                type="text" 

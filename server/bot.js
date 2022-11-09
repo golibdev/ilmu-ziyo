@@ -1,9 +1,11 @@
-const { Bot, Context, session, Keyboard } = require('grammy');
+const { Bot, session } = require('grammy');
 const { Router } = require('@grammyjs/router')
 const { TOKEN } = require('./src/bot/config/config');
-const { getAll, getOne } = require('./src/bot/controllers/getCourses');
+const courses = require('./src/bot/controllers/getCourses');
+const services = require('./src/bot/controllers/getServices');
 const { start, backHome } = require('./src/bot/controllers/start');
-const { register } = require('./src/bot/controllers/registerStudent');
+const course = require('./src/bot/controllers/registerStudent');
+const service = require('./src/bot/controllers/registerService');
 
 const bot = new Bot(TOKEN);
 
@@ -30,16 +32,25 @@ bot.on('callback_query', async (ctx) => {
 
    switch(query) {
       case 'courses':
-         await getAll(bot, chatId, messageId);
+         await courses.getAll(bot, chatId, messageId);
       break;
       case 'course':
-         await getOne(bot, id, chatId, messageId);
+         await courses.getOne(bot, id, chatId, messageId);
+      break;
+      case 'services':
+         await services.getAll(bot, chatId, messageId);
+      break;
+      case 'service':
+         await services.getOne(bot, id, chatId, messageId);
       break;
       case 'start':
          await backHome(bot, firstName, lastName, chatId, messageId)
       break;
       case 'enrollCourse':
-         await register(router, ctx, id)
+         await course.register(router, ctx, id)
+      break
+      case 'enrollService':
+         await service.register(router, ctx, id)
       break
    }
 })

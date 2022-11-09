@@ -77,6 +77,8 @@ exports.register = async (req, res) => {
          serviceId
       } = req.body
 
+      console.log(serviceId);
+
       if(!isValidObjectId(serviceId)) {
          return res.status(400).json({ message: "Xizmat mavjud emas" })
       }

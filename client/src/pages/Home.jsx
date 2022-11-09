@@ -31,8 +31,8 @@ export const Home = () => {
          <>
             <Navbar/>
             <Carousel/>
-            <Wrapper data={courses} type={"course"} />
             <Wrapper data={services} type={"service"} />
+            <Wrapper data={courses} type={"course"} />
             <Contact courses={courses} services={services}/>
             <Footer/>
          </>
